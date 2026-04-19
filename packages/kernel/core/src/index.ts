@@ -1207,6 +1207,7 @@ export type {
   MatchEntry,
   PatternMatch,
   PendingMatchStore,
+  TurnRequestKey,
   WatchPattern,
 } from "./watch-patterns/index.js";
 // webhook — outbound webhook delivery contract
