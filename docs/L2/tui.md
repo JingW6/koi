@@ -8,6 +8,8 @@
 
 ## Recent additions
 
+- **`PermissionPrompt` explicit width (#1913)**: `computePermissionPromptWidth(terminalCols)` clamps the modal to available columns and always returns a positive integer. OpenTUI's `blendCells` busy-loops when an absolute-positioned `<box>` has no explicit `width` — the missing prop saturated one CPU core and blocked all keyboard input. Responsive layout: title-row risk label stacks below the heading below `PERMISSION_PROMPT_NARROW_THRESHOLD` (30 cols); approval keys `y`/`a`/`!` are suppressed below `PERMISSION_PROMPT_MIN_SAFE_WIDTH` (20 cols) so users can fail-closed without reading a truncated prompt. `toolId` is never truncated at the approval boundary.
+
 - **`engine-channel-smoke.test.ts` settle budget increase**: bumped from 100ms to 500ms to fix intermittent CI failures on loaded runners where the Worker thread message dispatch took longer than 100ms to settle.
 
 
