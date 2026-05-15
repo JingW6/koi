@@ -2358,6 +2358,15 @@
         "@koi/test-utils": "workspace:*",
       },
     },
+    "packages/net/community-registry": {
+      "name": "@koi/community-registry",
+      "version": "0.0.0",
+      "dependencies": {
+        "@koi/core": "workspace:*",
+        "@koi/validation": "workspace:*",
+        "zod": "4.3.6",
+      },
+    },
     "packages/net/gateway": {
       "name": "@koi/gateway",
       "version": "0.0.0",
@@ -3818,6 +3827,8 @@
     "@koi/code-executor": ["@koi/code-executor@workspace:packages/virt/code-executor"],
 
     "@koi/code-mode": ["@koi/code-mode@workspace:packages/fs/code-mode"],
+
+    "@koi/community-registry": ["@koi/community-registry@workspace:packages/net/community-registry"],
 
     "@koi/config": ["@koi/config@workspace:packages/kernel/config"],
 
