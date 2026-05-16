@@ -2483,6 +2483,13 @@
         "@koi/test-utils": "workspace:*",
       },
     },
+    "packages/net/remote": {
+      "name": "@koi/remote",
+      "version": "0.0.0",
+      "dependencies": {
+        "@koi/core": "workspace:*",
+      },
+    },
     "packages/net/webhook-delivery": {
       "name": "@koi/webhook-delivery",
       "version": "0.0.0",
@@ -4099,6 +4106,8 @@
     "@koi/registry-nexus": ["@koi/registry-nexus@workspace:packages/fs/registry-nexus"],
 
     "@koi/registry-sqlite": ["@koi/registry-sqlite@workspace:packages/fs/registry-sqlite"],
+
+    "@koi/remote": ["@koi/remote@workspace:packages/net/remote"],
 
     "@koi/resolve": ["@koi/resolve@workspace:packages/fs/resolve"],
 
