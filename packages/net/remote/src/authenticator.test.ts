@@ -145,6 +145,20 @@ describe("authenticateRemoteRequest", () => {
     expect(result).toEqual({ ok: false, reason: "jwt_rejected" });
   });
 
+  test("malformed permission claims deny with jwt_rejected", async () => {
+    const result = await authenticateRemoteRequest(
+      {
+        bearerToken: await sign({ ...validPayload, permissions: ["remote:read", 123] }),
+        transport: "websocket",
+        operation: "read",
+        url: "wss://remote.example.com/session",
+      },
+      createOptions(),
+    );
+
+    expect(result).toEqual({ ok: false, reason: "jwt_rejected" });
+  });
+
   test("revoked device denies with untrusted_device", async () => {
     const options = createOptions();
     options.trustedDevices.revoke("user-1", "device-1", 2_000);

@@ -100,6 +100,15 @@ describe("verifyRemoteJwt", () => {
     expect(result).toEqual({ ok: false, reason: "expired" });
   });
 
+  test("non-finite clock skew cannot bypass expiration", async () => {
+    const result = await verifyRemoteJwt(await sign({ ...validPayload, exp: 999 }), {
+      ...verifierOptions,
+      clockSkewSeconds: Number.POSITIVE_INFINITY,
+    });
+
+    expect(result).toEqual({ ok: false, reason: "expired" });
+  });
+
   test("malformed compact JWT rejects with malformed", async () => {
     const result = await verifyRemoteJwt("not.a.jwt.with.too.many.parts", {
       ...verifierOptions,
@@ -178,21 +187,21 @@ describe("verifyRemoteJwt", () => {
     expect(result).toEqual({ ok: false, reason: "not_before" });
   });
 
-  test("mixed permissions array is treated as empty", async () => {
+  test("non-finite clock skew cannot bypass not-before", async () => {
+    const result = await verifyRemoteJwt(await sign({ ...validPayload, nbf: 1_001 }), {
+      ...verifierOptions,
+      clockSkewSeconds: Number.POSITIVE_INFINITY,
+    });
+
+    expect(result).toEqual({ ok: false, reason: "not_before" });
+  });
+
+  test("mixed permissions array rejects with invalid_permissions", async () => {
     const result = await verifyRemoteJwt(
       await sign({ ...validPayload, permissions: ["remote:connect", 123] }),
       verifierOptions,
     );
 
-    expect(result).toEqual({
-      ok: true,
-      claims: {
-        subject: "user-1",
-        deviceId: "device-1",
-        agentId: "agent-1",
-        permissions: [],
-        metadata: { label: "laptop" },
-      },
-    });
+    expect(result).toEqual({ ok: false, reason: "invalid_permissions" });
   });
 });

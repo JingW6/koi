@@ -36,6 +36,15 @@ export async function verifyRemoteJwt(
     return { ok: false, reason: "missing_device" };
   }
 
+  const claimPermissions = parsed.payload.permissions;
+  if (
+    claimPermissions !== undefined &&
+    (!Array.isArray(claimPermissions) ||
+      !claimPermissions.every((permission) => typeof permission === "string"))
+  ) {
+    return { ok: false, reason: "invalid_permissions" };
+  }
+
   return {
     ok: true,
     claims: mapClaims(parsed.payload, subject, deviceId),
@@ -123,7 +132,7 @@ function validateRegisteredClaims(
   if (payload.aud !== options.audience) return "invalid_audience";
 
   const nowSeconds = Math.floor((options.nowMs?.() ?? Date.now()) / SECOND_MS);
-  const skew = options.clockSkewSeconds ?? 0;
+  const skew = normalizeClockSkew(options.clockSkewSeconds);
   const exp = payload.exp;
   if (typeof exp !== "number" || !Number.isFinite(exp) || nowSeconds - skew >= exp) {
     return "expired";
@@ -138,16 +147,17 @@ function validateRegisteredClaims(
   return undefined;
 }
 
+function normalizeClockSkew(value: number | undefined): number {
+  if (value === undefined || !Number.isFinite(value) || value < 0) return 0;
+  return value;
+}
+
 function mapClaims(
   payload: Record<string, unknown>,
   subject: string,
   deviceId: string,
 ): RemoteJwtClaims {
-  const permissions = Array.isArray(payload.permissions)
-    ? payload.permissions.every((permission) => typeof permission === "string")
-      ? payload.permissions
-      : []
-    : [];
+  const permissions = Array.isArray(payload.permissions) ? payload.permissions : [];
   const metadata =
     payload.metadata !== null &&
     typeof payload.metadata === "object" &&
