@@ -18,6 +18,14 @@ export type { ContainerScope, DockerWorkspaceBackendConfig, MountMode } from "./
 export { createDockerWorkspaceBackend, createFilesystemPolicy } from "./docker-backend.js";
 export type { GitWorktreeBackendConfig } from "./git-backend.js";
 export { createGitWorktreeBackend } from "./git-backend.js";
+export type {
+  GitWorktreeOverlayManager,
+  GitWorktreeOverlayManagerConfig,
+  OverlayAcceptResult,
+  OverlayFileSystemConfig,
+  WorkspaceOverlay,
+} from "./overlay.js";
+export { createGitWorktreeOverlayManager, createOverlayFileSystem } from "./overlay.js";
 export { createWorkspaceProvider } from "./provider.js";
 export type { PruneOptions, PruneResult } from "./prune.js";
 export { pruneStaleWorkspaces } from "./prune.js";
