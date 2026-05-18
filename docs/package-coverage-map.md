@@ -4,10 +4,10 @@ Generated from active workspace packages with `bun scripts/generate-package-cove
 
 Current snapshot:
 
-- 223 workspace packages
+- 227 workspace packages
 - 11 package families
-- 223 packages with local test files
-- 199 packages with dedicated package docs
+- 227 packages with local test files
+- 203 packages with dedicated package docs
 
 ## Family Summary
 
@@ -16,10 +16,10 @@ Current snapshot:
 | drivers | 2 | 41 | 2 |
 | exec | 3 | 17 | 3 |
 | kernel | 4 | 126 | 0 |
-| lib | 145 | 770 | 126 |
+| lib | 148 | 780 | 129 |
 | meta | 6 | 119 | 5 |
 | mm | 12 | 54 | 12 |
-| net | 10 | 91 | 10 |
+| net | 11 | 92 | 11 |
 | sandbox | 12 | 67 | 12 |
 | sched | 5 | 22 | 5 |
 | security | 22 | 122 | 22 |
@@ -47,7 +47,7 @@ Each line shows package name, package directory, package description, test-file 
 - `@koi/engine-compose` (packages/kernel/engine-compose) - Middleware composition and guard factories for the Koi kernel. Tests: 7. Docs: -.
 - `@koi/engine-reconcile` (packages/kernel/engine-reconcile) - Reconciliation, supervision, and process management for the Koi kernel. Tests: 22. Docs: -.
 
-## lib (145)
+## lib (148)
 
 - `@koi/ace-types` (packages/lib/ace-types) - Shared domain types for ACE (Adaptive Continuous Enhancement) middleware and stores. Tests: 1. Docs: -.
 - `@koi/agent-discovery` (packages/lib/agent-discovery) - Runtime discovery of external coding agents (CLI, filesystem registry, MCP). Tests: 8. Docs: docs/L2/agent-discovery.md.
@@ -85,6 +85,8 @@ Each line shows package name, package directory, package description, test-file 
 - `@koi/dashboard-client` (packages/lib/dashboard-client) - Typed HTTP + SSE client SDK for the Koi dashboard API. Tests: 4. Docs: docs/L2/dashboard-client.md.
 - `@koi/dashboard-types` (packages/lib/dashboard-types) - Dashboard contracts: AgentStatus, SessionSummary, MetricPoint, TraceView, REST envelope, WS subscribe protocol. Tests: 1. Docs: docs/L2/dashboard-types.md.
 - `@koi/debug` (packages/lib/debug) - Debug package — step-through agent execution, breakpoints, and state inspection. Tests: 4. Docs: docs/L2/debug.md.
+- `@koi/decision-graph` (packages/lib/decision-graph) - Materialized decision trace graph over ledger snapshots. Tests: 3. Docs: docs/L2/decision-graph.md.
+- `@koi/decision-index` (packages/lib/decision-index) - Search-backed cross-session decision index over ledger snapshots. Tests: 1. Docs: docs/L2/decision-index.md.
 - `@koi/decision-ledger` (packages/lib/decision-ledger) - Per-session decision ledger projection — read-only join over trajectory + audit with run report as a sidecar summary. Tests: 1. Docs: docs/L2/decision-ledger.md.
 - `@koi/edit-match` (packages/lib/edit-match) - Search and replace files using cascading match strategies from exact to fuzzy. Tests: 4. Docs: -.
 - `@koi/errors` (packages/lib/errors) - Provide KoiRuntimeError class, circuit breaker, retry logic, and filesystem error mapping. Tests: 7. Docs: -.
@@ -92,7 +94,7 @@ Each line shows package name, package directory, package description, test-file 
 - `@koi/event-delivery` (packages/lib/event-delivery) - Manage event subscriptions with serialized delivery, retry, dead letter queue, and replay. Tests: 2. Docs: -.
 - `@koi/event-trace` (packages/lib/event-trace) - ATIF trajectory recording middleware — records every model/tool call to an inspectable trajectory document. Tests: 5. Docs: docs/L2/event-trace.md.
 - `@koi/execution-context` (packages/lib/execution-context) - Store and retrieve session context via AsyncLocalStorage for tool execution. Tests: 4. Docs: -.
-- `@koi/federation` (packages/lib/federation) - Multi-zone agent coordination — zone registry, sequence-cursor sync, cross-zone tool routing. Tests: 6. Docs: docs/L2/federation.md.
+- `@koi/federation` (packages/lib/federation) - Multi-zone agent coordination — zone registry, sequence-cursor sync, cross-zone tool routing. Tests: 7. Docs: docs/L2/federation.md.
 - `@koi/file-resolution` (packages/lib/file-resolution) - Read markdown files, resolve directory structures, enforce token budgets. Tests: 7. Docs: docs/L2/file-resolution.md.
 - `@koi/file-type` (packages/lib/file-type) - Magic-byte MIME detection for user-originated file content — clipboard, @-reference, upload. Tests: 1. Docs: docs/L2/file-type.md.
 - `@koi/forge-demand` (packages/lib/forge-demand) - Demand-triggered forge detection: capability gaps, repeated failures, latency degradation, user corrections.. Tests: 4. Docs: docs/L2/forge-demand.md.
@@ -164,6 +166,7 @@ Each line shows package name, package directory, package description, test-file 
 - `@koi/scratchpad-nexus` (packages/lib/scratchpad-nexus) - Nexus-backed ScratchpadComponent with optional local fallback. Tests: 4. Docs: docs/L2/scratchpad-nexus.md.
 - `@koi/search-nexus` (packages/lib/search-nexus) - Nexus-backed SearchBackend — Retriever + Indexer via Nexus search RPC. Tests: 3. Docs: docs/L2/search-nexus.md.
 - `@koi/secure-storage` (packages/lib/secure-storage) - OS keychain token storage with file-based locking for concurrent access. Tests: 3. Docs: -.
+- `@koi/sensor-ide` (packages/lib/sensor-ide) - Low-overhead IDE activity sensor for typing, diagnostics, file switching, and flow signals. Tests: 1. Docs: docs/L2/sensor-ide.md.
 - `@koi/session` (packages/lib/session) - Session persistence (SQLite/WAL) and transcript (append-only JSONL) for crash recovery. Tests: 9. Docs: docs/L2/session.md.
 - `@koi/settings` (packages/lib/settings) - Hierarchical settings cascade: user → project → local → flag → policy. Tests: 4. Docs: docs/L2/settings.md.
 - `@koi/shutdown` (packages/lib/shutdown) - Handle graceful shutdown signals and map exit codes for CLI and deploy. Tests: 3. Docs: -.
@@ -177,7 +180,7 @@ Each line shows package name, package directory, package description, test-file 
 - `@koi/task-spawn` (packages/lib/task-spawn) - Lightweight task tool for zero-friction subagent spawning + copilot routing. Tests: 8. Docs: docs/L2/task-spawn.md.
 - `@koi/task-tools` (packages/lib/task-tools) - LLM-callable task management tools — create, get, update, list, stop, output (L2). Tests: 2. Docs: docs/L2/task-tools.md.
 - `@koi/tasks` (packages/lib/tasks) - Pluggable task board persistence — in-memory and file-based backends. Tests: 12. Docs: docs/L2/tasks.md.
-- `@koi/team-runtime` (packages/lib/team-runtime) - Parallel multi-agent team orchestration with event replay, dependency-aware scheduling, and resource locking. Tests: 9. Docs: docs/L2/team-runtime.md.
+- `@koi/team-runtime` (packages/lib/team-runtime) - Parallel multi-agent team orchestration with event replay, dependency-aware scheduling, and resource locking. Tests: 12. Docs: docs/L2/team-runtime.md.
 - `@koi/test` (packages/lib/test) - Test doubles, context factories, event collectors, and assertion helpers for Koi agent tests. Tests: 11. Docs: -.
 - `@koi/tool-browser` (packages/lib/tool-browser) - Browser automation tools via accessibility-tree-first BrowserDriver. Tests: 20. Docs: docs/L2/tool-browser.md.
 - `@koi/tool-exec` (packages/lib/tool-exec) - execute_code: runs model scripts via Koi tools in an isolated Bun Worker, returning only the final result (L2). Tests: 3. Docs: docs/L2/tool-exec.md.
@@ -191,7 +194,7 @@ Each line shows package name, package directory, package description, test-file 
 - `@koi/validation` (packages/lib/validation) - Validate brick artifacts, pipelines, fitness scores, and config schemas. Tests: 17. Docs: -.
 - `@koi/variant-selection` (packages/lib/variant-selection) - Selection strategies for degenerate tool/brick variants. L0u utility package.. Tests: 7. Docs: -.
 - `@koi/watch-patterns` (packages/lib/watch-patterns) - Linear-time regex matcher, line buffer, and pending-match store for reactive shell notifications. Tests: 5. Docs: docs/L2/watch-patterns.md.
-- `@koi/workspace` (packages/lib/workspace) - Git worktree WorkspaceBackend and ComponentProvider for agent isolation. Tests: 3. Docs: docs/L2/workspace.md.
+- `@koi/workspace` (packages/lib/workspace) - Git worktree WorkspaceBackend and ComponentProvider for agent isolation. Tests: 4. Docs: docs/L2/workspace.md.
 - `@koi/workspace-conformance` (packages/lib/workspace-conformance) - Shared bun:test conformance suite for WorkspaceBackend implementations. Tests: 1. Docs: docs/L2/workspace-conformance.md.
 - `@koi/workspace-nexus` (packages/lib/workspace-nexus) - Nexus-backed WorkspaceBackend with optional local fallback. Tests: 4. Docs: docs/L2/workspace-nexus.md.
 
@@ -219,8 +222,9 @@ Each line shows package name, package directory, package description, test-file 
 - `@koi/session-repair` (packages/mm/session-repair) - Validate and repair message history through orphan repair, dedup, and merge phases. Tests: 3. Docs: docs/L2/session-repair.md.
 - `@koi/token-estimator` (packages/mm/token-estimator) - Estimate tokens using configurable heuristics (default: 4 chars per token). Tests: 2. Docs: docs/L2/token-estimator.md.
 
-## net (10)
+## net (11)
 
+- `@koi/community-registry` (packages/net/community-registry) - Standalone marketplace HTTP registry for publishing, discovering, searching, and installing Koi skills and plugins. Tests: 1. Docs: docs/L2/community-registry.md.
 - `@koi/daemon` (packages/net/daemon) - OS-process supervisor and worker backends (subprocess) for long-running agent workers. Tests: 15. Docs: docs/L2/daemon.md.
 - `@koi/gateway` (packages/net/gateway) - WebSocket gateway core — routing, auth, sequencing, backpressure (v2 minimal, no node registry or tool routing). Tests: 9. Docs: docs/L2/gateway.md.
 - `@koi/gateway-canvas` (packages/net/gateway-canvas) - Canvas HTTP server: surface CRUD with ETag CAS and SSE streaming for real-time agent-rendered content. Tests: 3. Docs: docs/L2/gateway-canvas.md.

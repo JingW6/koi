@@ -45,6 +45,8 @@
     "@koi/dashboard-client": "workspace:*",
     "@koi/dashboard-types": "workspace:*",
     "@koi/debug": "workspace:*",
+    "@koi/decision-graph": "workspace:*",
+    "@koi/decision-index": "workspace:*",
     "@koi/decision-ledger": "workspace:*",
     "@koi/engine": "workspace:*",
     "@koi/engine-compose": "workspace:*",
@@ -170,6 +172,7 @@
     "@koi/task-spawn": "workspace:*",
     "@koi/task-tools": "workspace:*",
     "@koi/tasks": "workspace:*",
+    "@koi/team-runtime": "workspace:*",
     "@koi/temporal": "workspace:*",
     "@koi/toolsets": "workspace:*",
     "@koi/tools-builtin": "workspace:*",
@@ -202,7 +205,7 @@
     "build": "bun ../../../scripts/run-tsup.ts",
     "typecheck": "tsc --noEmit",
     "lint": "biome check .",
-    "test": "bun test",
+    "test": "bun ../../../scripts/run-runtime-package-tests.ts",
     "record": "bun scripts/record-cassettes.ts"
   }
 }

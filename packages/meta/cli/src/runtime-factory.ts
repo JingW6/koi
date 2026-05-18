@@ -12,6 +12,7 @@
  *   @koi/tools-bash           — Bash execution (sandboxed when adapter available) + bash_background
  *   @koi/tasks                — in-memory task board for background job tracking
  *   @koi/task-tools           — task_create, task_get, task_update, task_list, task_stop, task_output
+ *   @koi/team-runtime         — TeamCreate, TeamDelete, TeamAssignTask, TeamReportTask
  *   @koi/tools-web            — web_fetch
  *   @koi/tool-notebook        — notebook_read, notebook_add_cell, notebook_replace_cell, notebook_delete_cell
  *   @koi/session              — JSONL transcript recording (optional, via config.session)
@@ -2596,7 +2597,32 @@ export async function createKoiRuntime(config: KoiRuntimeConfig): Promise<KoiRun
   // that match known secret formats (API keys, tokens, credentials).
   // Must be in the middleware stack to protect shell and web_fetch from leaking
   // workspace secrets — omitting it is a security regression.
-  const exfiltrationGuardMw = createExfiltrationGuardMiddleware();
+  //
+  // KOI_EXFIL_ACTION (block|redact|warn) may override the default "block".
+  // SECURITY: weakening the guard to "warn"/"redact" is gated behind an
+  // explicit, narrowly-scoped opt-in (KOI_EXFIL_ALLOW_DOWNGRADE=1). The
+  // action var alone is intentionally NOT enough — that prevents an
+  // accidentally-inherited broad `.env`/CI value from silently disabling
+  // secret-exfiltration enforcement on runs that handle real credentials.
+  // Re-asserting "block" explicitly is always allowed (it is the default).
+  const exfilAction = process.env.KOI_EXFIL_ACTION;
+  const exfilDowngradeAllowed = process.env.KOI_EXFIL_ALLOW_DOWNGRADE === "1";
+  let resolvedExfilAction: "block" | "redact" | "warn" | undefined;
+  if (exfilAction === "block") {
+    resolvedExfilAction = "block";
+  } else if ((exfilAction === "redact" || exfilAction === "warn") && exfilDowngradeAllowed) {
+    resolvedExfilAction = exfilAction;
+  } else {
+    if (exfilAction === "redact" || exfilAction === "warn") {
+      console.warn(
+        `[koi] ignoring KOI_EXFIL_ACTION=${exfilAction}: set KOI_EXFIL_ALLOW_DOWNGRADE=1 to permit weakening the exfiltration guard; defaulting to block`,
+      );
+    }
+    resolvedExfilAction = undefined; // middleware default (block)
+  }
+  const exfiltrationGuardMw = createExfiltrationGuardMiddleware(
+    resolvedExfilAction !== undefined ? { action: resolvedExfilAction } : undefined,
+  );
 
   // --- @koi/middleware-tool-error-formatter: convert tool throws to model-readable responses ---
   // Catches throws via wrapToolCall (priority 170, resolve phase) and returns a

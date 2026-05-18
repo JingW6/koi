@@ -427,6 +427,20 @@
         "@koi/core": "workspace:*",
       },
     },
+    "packages/lib/decision-graph": {
+      "name": "@koi/decision-graph",
+      "version": "0.0.0",
+      "dependencies": {
+        "@koi/core": "workspace:*",
+      },
+    },
+    "packages/lib/decision-index": {
+      "name": "@koi/decision-index",
+      "version": "0.0.0",
+      "dependencies": {
+        "@koi/core": "workspace:*",
+      },
+    },
     "packages/lib/decision-ledger": {
       "name": "@koi/decision-ledger",
       "version": "0.0.0",
@@ -1102,6 +1116,13 @@
       "name": "@koi/secure-storage",
       "version": "0.0.0",
     },
+    "packages/lib/sensor-ide": {
+      "name": "@koi/sensor-ide",
+      "version": "0.0.0",
+      "dependencies": {
+        "@koi/core": "workspace:*",
+      },
+    },
     "packages/lib/session": {
       "name": "@koi/session",
       "version": "0.0.0",
@@ -1476,6 +1497,7 @@
         "@koi/spawn-tools": "workspace:*",
         "@koi/task-tools": "workspace:*",
         "@koi/tasks": "workspace:*",
+        "@koi/team-runtime": "workspace:*",
         "@koi/token-estimator": "workspace:*",
         "@koi/tool-browser": "workspace:*",
         "@koi/tool-exec": "workspace:*",
@@ -1597,6 +1619,8 @@
         "@koi/dashboard-client": "workspace:*",
         "@koi/dashboard-types": "workspace:*",
         "@koi/debug": "workspace:*",
+        "@koi/decision-graph": "workspace:*",
+        "@koi/decision-index": "workspace:*",
         "@koi/decision-ledger": "workspace:*",
         "@koi/dream": "workspace:*",
         "@koi/engine": "workspace:*",
@@ -1717,6 +1741,7 @@
         "@koi/task-spawn": "workspace:*",
         "@koi/task-tools": "workspace:*",
         "@koi/tasks": "workspace:*",
+        "@koi/team-runtime": "workspace:*",
         "@koi/temporal": "workspace:*",
         "@koi/tool-browser": "workspace:*",
         "@koi/tool-exec": "workspace:*",
@@ -1845,6 +1870,15 @@
       "version": "0.0.0",
       "dependencies": {
         "@koi/core": "workspace:*",
+      },
+    },
+    "packages/net/community-registry": {
+      "name": "@koi/community-registry",
+      "version": "0.0.0",
+      "dependencies": {
+        "@koi/core": "workspace:*",
+        "@koi/validation": "workspace:*",
+        "zod": "4.3.6",
       },
     },
     "packages/net/daemon": {
@@ -2788,6 +2822,8 @@
 
     "@koi/code-executor": ["@koi/code-executor@workspace:packages/exec/code-executor"],
 
+    "@koi/community-registry": ["@koi/community-registry@workspace:packages/net/community-registry"],
+
     "@koi/config": ["@koi/config@workspace:packages/lib/config"],
 
     "@koi/context-manager": ["@koi/context-manager@workspace:packages/lib/context-manager"],
@@ -2809,6 +2845,10 @@
     "@koi/dashboard-ui": ["@koi/dashboard-ui@workspace:packages/ui/dashboard-ui"],
 
     "@koi/debug": ["@koi/debug@workspace:packages/lib/debug"],
+
+    "@koi/decision-graph": ["@koi/decision-graph@workspace:packages/lib/decision-graph"],
+
+    "@koi/decision-index": ["@koi/decision-index@workspace:packages/lib/decision-index"],
 
     "@koi/decision-ledger": ["@koi/decision-ledger@workspace:packages/lib/decision-ledger"],
 
@@ -3083,6 +3123,8 @@
     "@koi/search-nexus": ["@koi/search-nexus@workspace:packages/lib/search-nexus"],
 
     "@koi/secure-storage": ["@koi/secure-storage@workspace:packages/lib/secure-storage"],
+
+    "@koi/sensor-ide": ["@koi/sensor-ide@workspace:packages/lib/sensor-ide"],
 
     "@koi/session": ["@koi/session@workspace:packages/lib/session"],
 
